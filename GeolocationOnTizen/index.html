@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, height=device-height">
+<title>Google Maps on Tizen</title>
+
+<link rel="stylesheet" href="./css/jquery.mobile.1.2.0.css" />
+<link rel="stylesheet" href="./css/jquery.mobile.theme-1.2.0.css" />
+<link rel="stylesheet" href="./css/jquery.mobile.structure-1.2.0.css" />
+<link rel="stylesheet" href="./css/style.css" />
+<script type="text/javascript" src="./js/lib/external/jquery-1.8.0.js"></script>
+<script type="text/javascript" src="./js/lib/external/jquery.mobile-1.2.0.js"></script>
+<script type="text/javascript" src="./js/lib/tlib/tlib.js"></script>
+<script type="text/javascript" src="./js/lib/tlib/tlib.logger.js"></script>
+<script type="text/javascript" src="./js/lib/tlib/tlib.view.js"></script>
+<script type="text/javascript" src="./js/lib/tlib/tlib.network.js"></script>
+<script type="text/javascript" src="./js/lib/tlib/tlib.ajax.js"></script>
+<script type="text/javascript" src="./js/googleMaps/googleLocation.js"></script>
+<script type="text/javascript" src="./js/googleMaps/googleDistance.js"></script>
+<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDdKjhStoKF6t0xxA_hFxYBmKrEb77b-nQ&sensor=true"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+
+</head>
+
+<body>
+	<div data-role="page" id="main" data-theme="d">
+		<div data-role="header" data-position="fixed" data-theme="d" id="toptitle">
+			<h1>서울 무인자전거 길찾기</h1>
+		</div>
+		<div data-role="content" data-theme="d">
+			<ul data-role="listview" style="list-style-type:circle">
+				
+				<li id="introduce"><a href="#introduce" style="height:60px">따릉이 소개</a></li>
+				<li id="rentposition"><a href="#rentposition" style="height:60px">대여소 위치</a></li>
+				<li id="getDirection"><a href="#getDirections" style="height:60px">길 찾기</a></li>
+				<li id="findLocation"><a href="#searchForPlaces" style="height:60px">가까운 대여소 찾기</a></li>
+				
+				
+			</ul>
+		</div>
+		<div data-role="popup" class="popup">
+			<a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+			<p></p>
+		</div>
+	</div>
+	
+
+
+	
+		
+	<div data-role="page" id="introduce" data-theme="d">
+		<div data-role="header" data-position="fixed" data-theme="d">
+			<h1>따릉이 소개</h1>
+			
+		</div>
+		<div id="introduce_page">
+			
+		</div>
+		
+		<div data-role="footer" data-position="fixed">
+			<div data-role="navbar">
+				<ul>
+					<li><a href="#main">Home</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>	
+		
+
+		
+		
+	<div data-role="page" id="rentposition" data-theme="d">
+		<div data-role="header" data-position="fixed" data-theme="d">
+			<h1> 대여소 위치 </h1>
+		</div>
+		<div> <img src="WebContent/list.jpg" style="mat-width:100% ; height: auto;"> </div>
+		
+		<div id="my_canvas"></div>
+		<div data-role="footer" data-position="fixed">
+			<div data-role="navbar">
+				<ul>
+					<li><a href="#main">Home</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	
+	
+	<div data-role="page" id="searchForPlaces" data-theme="d">
+		<div data-role="header" data-position="fixed" data-theme="d">
+			<h1>Search for places</h1>
+		</div>
+		<div class="ui-body ui-body-b ui-corner-all myForm">
+			<div data-role="fieldcontain">
+				<label>Location to search for:</label> <input type="text" name="searchLocation" id="searchLocation" value="" />
+				<a href="" data-role="button" data-mini="true" id="searchLocationButton">위치 설정</a>
+				<br>
+				<a href="" data-role="button" data-mini="true" id="myLocationButton">현재 위치로 설정</a>
+				<br>
+				<a href="" data-role="button" data-mini="true" id="nearest_button">가까운 대여소 찾기</a>
+			</div>
+		
+			
+		</div>
+		<div id="one_canvas"></div>
+		
+		<div id="searchMap"></div>
+		<div data-role="footer" data-position="fixed">
+			<div data-role="navbar">
+				<ul>
+					<li><a href="#main">Home</a></li>
+				</ul>
+			</div>
+		</div>
+		<div data-role="popup" class="popup">
+			<a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+			<p></p>
+		</div>
+	</div>
+
+	<div data-role="page" id="getDirections" data-theme="d">
+		<div data-role="header" data-position="fixed" data-theme="d">
+			<h1>Get directions</h1>
+		</div>
+		<div class="ui-body ui-body-b ui-corner-all myForm">
+			<div data-role="fieldcontain">
+				<label>Location from:</label> <input type="text" name="locationFrom" id="locationFrom" value="" data-mini="true" />
+				<a href="" data-role="button" data-mini="true" id="getFromButton">출발지 설정</a>
+				<br>
+				<a href="" data-role="button" data-mini="true" id="myLocationButton2">현재 위치에서 출발</a>
+			</div>
+			<div data-role="fieldcontain">
+				<label for="searchLocation">Location to:</label> <input type="text" name="locationTo" id="locationTo" value="" data-mini="true" />
+				<a href="" data-role="button" data-mini="true" id="getToButton">도착지 설정</a>
+			</div>
+			<div data-role="fieldcontain">
+			<a href="" data-role="button" data-mini="true" id="getDirButton">길찾기</a>
+			</div>
+		</div>
+		<div id="directionsMap"></div>
+		<div data-role="footer" data-position="fixed">
+			<div data-role="navbar">
+				<ul>
+					<li><a href="#main">Home</a></li>
+				</ul>
+			</div>
+		</div>
+		<div data-role="popup" class="popup">
+			<a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+			<p></p>
+		</div>
+	</div>
+
+
+
+
+
+</body>
+</html>

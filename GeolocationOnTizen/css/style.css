@@ -1,0 +1,89 @@
+div[data-role="page"] {
+	height: 100%;
+	
+}
+
+li a{
+
+	background-image: url('bike.bmp');
+	margin: 5px;
+  	border: 5px solid #fff;
+  	text-align: center;
+  	font-size: 25px;
+	
+}
+
+
+html {
+	height: 100%;
+	
+}
+
+body {
+	height: 100%;
+	margin: 0;
+	padding: 0
+	
+}
+
+
+
+#map_canvas {
+	height: 85%;
+	width: 100%;
+}
+#one_canvas {
+	height: 85%;
+	width: 100%;
+}
+
+#my_canvas {
+	height: 85%;
+	width: 100%;
+}
+
+#searchMap {
+	height: 66%;
+	width: 100%;
+}
+
+#directionsMap {
+	height: 50%;
+	width: 100%;
+}
+
+#markersMap {
+	height: 85%;
+	width: 100%;
+}
+
+#streetViewMap {
+	height: 30%;
+	width: 100%;
+}
+
+#streetViewPanorama {
+	height: 50%;
+	width: 100%;
+}
+
+#streetViewImg {
+	width:100%;
+	display: block;
+}
+
+/* Overides the Google Maps style change for fixed positioned footer */
+.ui-footer-fixed {
+	position: fixed !important;
+}
+
+/* More text in header can be displayed */
+.ui-title {
+	margin: 0.6em 7% .8em !important;
+	height: 20px
+}
+
+
+.myForm {
+	margin: 10px;
+}
